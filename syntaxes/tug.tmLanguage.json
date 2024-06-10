@@ -7,6 +7,18 @@
 		},
 		{
 			"include": "#strings"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#function"
+		},
+		{
+			"include": "#none"
 		}
 	],
 	"repository": {
@@ -18,8 +30,21 @@
 		},
 		"function": {
 			"patterns": [{
-				"name": "entity.name.function.tug",
-				"match": "\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\([^)]*\\)"
+				"begin": "([A-Za-z_][A-Za-z0-9_]*)\\s*(\\()",
+				"beginCaptures": {
+					"1": {
+						"name": "entity.name.function.tug"
+					},
+					"2": {
+						"name": "punctuation.brackets.round.tug"
+					}
+				},
+				"end": "\\)",
+				"endCaptures": {
+					"0": {
+						"name": "punctuation.brackets.round.tug"
+					}
+				}
 			}]
 		},
 		"none": {
