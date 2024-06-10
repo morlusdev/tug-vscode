@@ -28,6 +28,12 @@
 				"match": "\\b(none)\\b"
 			}]
 		},
+		"comment": {
+			"patterns": [{
+				"name": "comment.line.number-sign",
+				"match": "#.*"
+			}]
+		},
 		"strings": {
 			"patterns": [
 				{
