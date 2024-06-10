@@ -4,6 +4,10 @@
   "description": "A simple syntax highlighter for Tug",
   "version": "0.0.1",
   "icon": "./image/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/morlusdev/tug-vscode.git"
+  },
   "engines": {
     "vscode": "^1.90.0"
   },
