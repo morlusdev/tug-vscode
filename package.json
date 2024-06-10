@@ -1,0 +1,30 @@
+{
+  "name": "tug-vscode",
+  "displayName": "Tug Programming Language",
+  "description": "A simple syntax highlighter for Tug",
+  "version": "0.0.1",
+  "icon": "./image/icon.png",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "tug",
+      "icon": {
+        "dark": "./images/icon.png",
+        "light": "./images/icon.png"
+      },
+      "aliases": ["Tug", "tug"],
+      "extensions": [".tug"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "tug",
+      "scopeName": "source.tug",
+      "path": "./syntaxes/tug.tmLanguage.json"
+    }]
+  }
+}
