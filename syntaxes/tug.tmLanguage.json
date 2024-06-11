@@ -12,13 +12,13 @@
 			"include": "#numbers"
 		},
 		{
+			"include": "#none"
+		},
+		{
 			"include": "#comment"
 		},
 		{
-			"include": "#function"
-		},
-		{
-			"include": "#none"
+			"include": "#functions"
 		}
 	],
 	"repository": {
@@ -28,30 +28,56 @@
 				"match": "\\b(if|else|loop|skip|break|func|ret)\\b"
 			}]
 		},
-		"function": {
-			"patterns": [{
-				"begin": "([A-Za-z_][A-Za-z0-9_]*)\\s*(\\()",
-				"beginCaptures": {
-					"1": {
-						"name": "entity.name.function.tug"
-					},
-					"2": {
-						"name": "punctuation.brackets.round.tug"
-					}
-				},
-				"end": "\\)",
-				"endCaptures": {
-					"0": {
-						"name": "punctuation.brackets.round.tug"
-					}
-				}
-			}]
-		},
 		"none": {
 			"patterns": [{
 				"name": "constant.language.tug",
-				"match": "\\b(none)\\b"
+				"match": "\\bnone\\b"
 			}]
+		},
+		"functions": {
+			"patterns": [
+				{
+					"name": "meta.function.call.tug",
+					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\(",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.call.tug"
+						}
+					}
+				},
+				{
+					"name": "meta.function.definition.tug",
+					"begin": "\\b(func)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\(",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.other.function.tug"
+						},
+						"2": {
+							"name": "entity.name.function.tug"
+						}
+					},
+					"end": "\\)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.parameters.end.tug"
+						}
+					},
+					"patterns": [
+						{
+							"match": "[a-zA-Z_][a-zA-Z0-9_]*",
+							"name": "variable.parameter.tug"
+						}
+					]
+				},
+				{
+					"name": "entity.name.function.tug",
+					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\s*=\\s*\\b(func)\\b)"
+				},
+				{
+					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b(?!\\s*=\\s*\\b(func)\\b)",
+					"name": "variable.other.tug"
+				}
+			]
 		},
 		"comment": {
 			"patterns": [{
@@ -87,12 +113,16 @@
 		"numbers": {
 			"patterns": [
 				{
-				"name": "constant.numeric.integer.tug",
-				"match": "\\d+"
+					"match": "(?<![\\w\\d.])\\d+(\\.\\d*)?(-?\\d*)?",
+					"name": "constant.numeric.float.tug"
 				},
 				{
-				"name": "constant.numeric.decimal.tug",
-				"match": "\\d+\\.\\d+"
+					"match": "(?<![\\w\\d.])\\.\\d+(-?\\d*)?",
+					"name": "constant.numeric.float.tug"
+				},
+				{
+					"match": "(?<![\\w\\d.])\\d+(?![.0-9])",
+					"name": "constant.numeric.integer.tug"
 				}
 			]
 		}
